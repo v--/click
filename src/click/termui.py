@@ -8,7 +8,7 @@ import sys
 import typing as t
 from contextlib import AbstractContextManager
 from contextlib import redirect_stdout
-from gettext import gettext as _
+from .locales import gettext as _
 
 from ._compat import isatty
 from ._compat import strip_ansi
@@ -16,6 +16,7 @@ from ._compat import WIN
 from .exceptions import Abort
 from .exceptions import UsageError
 from .globals import resolve_color_default
+from .locales import gettext as _
 from .types import Choice
 from .types import convert_type
 from .types import ParamType
@@ -205,7 +206,7 @@ def prompt(
             if hide_input:
                 echo(_("Error: The value you entered was invalid."), err=err)
             else:
-                echo(_("Error: {e.message}").format(e=e), err=err)
+                echo(_("Error: {message}").format(message=e.message), err=err)
             continue
         if not confirmation_prompt:
             return result
